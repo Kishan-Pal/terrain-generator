@@ -1,12 +1,13 @@
 import { useState } from "react";
+import GreenPage from "./GreenPage";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <>
-      <div className="h-2 text-3xl">hi</div>
-    </>
+    <div className="flex justify-center items-center h-[100vh] w-[100%]">
+      <GreenPage />
+    </div>
   );
 }
 
