@@ -8,6 +8,11 @@ import image5 from "./images/5.jpeg";
 import image6 from "./images/6.jpeg";
 import image7 from "./images/7.jpeg";
 import image8 from "./images/8.jpeg";
+import image9 from "./images/9.jpeg";
+import image10 from "./images/10.jpeg";
+import image11 from "./images/11.jpeg";
+import image12 from "./images/12.jpeg";
+import image13 from "./images/13.jpeg";
 
 // ! add image in folder,
 // ! import image,
@@ -15,13 +20,14 @@ import image8 from "./images/8.jpeg";
 // ! imageArray.push
 // ! increment imageCount;
 
-const viewPort = 400;
-const imageCount = 8;
+const viewPort = 500;
+const imageCount = 13;
+const delay = 50;
 var end = false;
 
 const GreenPage = () => {
   const input = useRef();
-  const [grid, setGrid] = useState(16);
+  const [grid, setGrid] = useState(25);
   const [imageArray, setImageArray] = useState([]);
   const [gridArray, setGridArray] = useState();
   const [connectors, setConnectors] = useState({
@@ -33,6 +39,11 @@ const GreenPage = () => {
     6: ["aba", "aaa", "aba", "aba"],
     7: ["aba", "aba", "aba", "aaa"],
     8: ["aaa", "aba", "aba", "aba"],
+    9: ["aba", "aaa", "aaa", "aba"],
+    10: ["aba", "aba", "aaa", "aaa"],
+    11: ["aba", "aaa", "aba", "aaa"],
+    12: ["aba", "aba", "aba", "aaa"],
+    13: ["aaa", "aba", "aba", "aaa"],
   });
 
   useEffect(() => {
@@ -45,8 +56,13 @@ const GreenPage = () => {
     imageArray.push(image6);
     imageArray.push(image7);
     imageArray.push(image8);
-    // console.log(imageArray);
+    imageArray.push(image9);
+    imageArray.push(image10);
+    imageArray.push(image11);
+    imageArray.push(image12);
+    imageArray.push(image13);
     setImageArray([...imageArray]);
+    // console.log(imageArray);
 
     const array = new Array(grid)
       .fill()
@@ -80,12 +96,12 @@ const GreenPage = () => {
     // }
   }, []);
 
-  useEffect(() => {}, [grid]);
+  // useEffect(() => {}, [grid]);
 
-  useEffect(() => {
-    // ! console.log(gridArray);
-    //!  console.log("Hi");
-  }, [gridArray]);
+  // useEffect(() => {
+  //   // ! console.log(gridArray);
+  //   // !  console.log("Hi");
+  // }, [gridArray]);
 
   const collapse = (row, col, imageNo) => {
     if (imageNo === undefined) {
@@ -208,7 +224,7 @@ const GreenPage = () => {
     const time = setInterval(() => {
       if (end) clearInterval(time);
       input.current.click();
-    }, 100);
+    }, delay);
 
     return () => clearInterval(time); // Correct way to clear the interval
   }, []);
@@ -217,7 +233,7 @@ const GreenPage = () => {
     <>
       <div
         ref={input}
-        className={`h-[${viewPort}px] w-[${viewPort}px] bg-black`}
+        className={`h-[${viewPort}px] w-[${viewPort}px] `}
         onClick={() => startCollapse()}
       >
         {gridArray?.map((row, rowIndex) => (
@@ -229,7 +245,7 @@ const GreenPage = () => {
             {row.map((tile, colIndex) => (
               <div
                 key={colIndex}
-                className={`h-full bg-blue-700 `}
+                className={`h-full bg-black text-[8px] text-center text-white`}
                 style={{ width: `${viewPort / grid}px` }}
               >
                 {tile.image !== null ? (
@@ -238,9 +254,8 @@ const GreenPage = () => {
                     alt={`Tile ${rowIndex}-${colIndex}`}
                     className="h-full w-full object-cover "
                   />
-                ) : (
-                  ""
-                )}
+                ) : // tile.possibilities[0]
+                null}
               </div>
             ))}
           </div>
@@ -249,5 +264,6 @@ const GreenPage = () => {
     </>
   );
 };
+// #8fd82f
 
 export default GreenPage;
